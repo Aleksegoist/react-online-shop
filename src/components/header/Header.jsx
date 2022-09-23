@@ -55,11 +55,11 @@ const Header = () => {
             <div className='nav__icons'>
               <span className='fav__icon'>
                 <AiOutlineHeart size={24} />
-                <span className='badge'>1</span>
+                <span className='badge1'>1</span>
               </span>
               <span className='cart__icon'>
                 <HiOutlineShoppingBag size={24} />
-                <span className='badge'>1</span>
+                <span className='badge1'>1</span>
               </span>
               <span>
                 <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt='' />
