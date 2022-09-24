@@ -3,11 +3,13 @@ import '../styles/home.css';
 import { Col, Container, Row } from 'reactstrap';
 import Helmet from '../components/helmet/Helmet';
 import heroImg from '../assets/hero_img.png';
+import counterImg from '../assets/counter_time.png';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Services from '../services/Services';
 import ProductsList from '../components/ui/ProductsList';
 import products from '../data/product';
+import Clock from '../components/ui/Clock';
 
 const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
@@ -42,7 +44,7 @@ const Home = () => {
                   necessitatibus minima fugiat quia fuga voluptatibus, eos
                   inventore soluta dolorem quod.
                 </p>
-                <motion.button whileTap={{ scale: 1.2 }} className='buy__btn'>
+                <motion.button whileHover={{ scale: 1.1 }} className='buy__btn'>
                   <Link to='/shop'>SHOP NOW</Link>
                 </motion.button>
               </div>
@@ -60,7 +62,7 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center'>
-              <h2 className='section__title'>Trending Products</h2>
+              <h2 className='section__title mb-4'>Trending Products</h2>
             </Col>
             <ProductsList data={trendingProducts} />
           </Row>
@@ -71,10 +73,33 @@ const Home = () => {
         <Container>
           <Row>
             <Col lg='12' className='text-center'>
-              <h2 className='section__title'>Best Sales</h2>
+              <h2 className='section__title mb-4'>Best Sales</h2>
             </Col>
 
             <ProductsList data={bestSalesProducts} />
+          </Row>
+        </Container>
+      </section>
+
+      <section className='timer__count'>
+        <Container>
+          <Row>
+            <Col lg='6' md='6'>
+              <div className='clock__top-content'>
+                <h4 className='text-white fs-6 mb-2'>Limited Offers</h4>
+                <h3 className='text-white fs-5 mb-3'>Quality Trainers</h3>
+              </div>
+              <Clock />
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                className='buy__btn store__btn'
+              >
+                <Link to='/shop'>Visit Store</Link>
+              </motion.button>
+            </Col>
+            <Col lg='6' md='6' className='text-end'>
+              <img src={counterImg} alt='' />
+            </Col>
           </Row>
         </Container>
       </section>
