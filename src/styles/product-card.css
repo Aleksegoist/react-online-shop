@@ -2,11 +2,20 @@
   cursor: pointer;
 }
 
-.product__info h3 {
+.trending__products h2 {
+  margin-bottom: 1.6rem;
+}
+
+.product__info a:hover {
+  color: inherit;
+}
+
+.product__info h3 a {
   font-size: 1.2rem;
   color: var(--primary-color);
   font-weight: 600;
   margin-top: 15px;
+  text-decoration: none;
 }
 
 .product__info span {
@@ -17,4 +26,8 @@
   color: var(--primary-color);
   font-size: 1.3rem;
   font-weight: 500;
+}
+
+.best__sales h2 {
+  margin-bottom: 1.6rem;
 }
