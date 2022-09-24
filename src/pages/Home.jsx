@@ -15,6 +15,9 @@ const Home = () => {
   const [trendingProducts, setTrendingProducts] = useState([]);
   const [bestSalesProducts, setBestSalesProducts] = useState([]);
 
+  const [mobileProducts, setMobileProducts] = useState([]);
+  const [wirelessProducts, setWirelessProducts] = useState([]);
+
   const year = new Date().getFullYear();
 
   useEffect(() => {
@@ -26,8 +29,18 @@ const Home = () => {
       (item) => item.category === 'shirts'
     );
 
+    const filteredMobileProducts = products.filter(
+      (item) => item.category === 'mobile'
+    );
+
+    const filteredWirelessProducts = products.filter(
+      (item) => item.category === 'wireless'
+    );
+
     setTrendingProducts(filteredTrendingProducts);
     setBestSalesProducts(filteredBestSalesProducts);
+    setMobileProducts(filteredMobileProducts);
+    setWirelessProducts(filteredWirelessProducts);
   }, []);
 
   return (
@@ -57,7 +70,9 @@ const Home = () => {
           </Row>
         </Container>
       </section>
+
       <Services />
+
       <section className='trending__products'>
         <Container>
           <Row>
@@ -104,7 +119,17 @@ const Home = () => {
         </Container>
       </section>
 
-      <section></section>
+      <section className='new__arrivals'>
+        <Container>
+          <Row>
+            <Col lg='12' className='text-center'>
+              <h2 className='section__title mb-4'>New Arrivals</h2>
+            </Col>
+            <ProductsList data={mobileProducts} />
+            <ProductsList data={wirelessProducts} />
+          </Row>
+        </Container>
+      </section>
     </Helmet>
   );
 };
