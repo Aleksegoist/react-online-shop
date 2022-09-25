@@ -1,6 +1,5 @@
 .service__item {
   padding: 20px;
-
   display: flex;
   align-items: center;
   column-gap: 0.7rem;
@@ -17,4 +16,21 @@
 .service__item p {
   font-size: 0.9rem;
   color: #222;
+}
+
+@media only screen and (max-width: 992px) {
+  .service__item {
+    padding: 5px;
+    font-size: 1.2rem;
+  }
+
+  .service__item h3 {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .service__item {
+    margin-bottom: 1rem;
+  }
 }
