@@ -1,12 +1,15 @@
 import React from 'react';
+import '../../styles/product-card.css';
+
 import { AiOutlinePlus } from 'react-icons/ai';
 import { motion } from 'framer-motion';
-import '../../styles/product-card.css';
 import { Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../redux/slices/cartSlice';
+
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ item }) => {
   const dispatch = useDispatch();
@@ -20,7 +23,7 @@ const ProductCard = ({ item }) => {
         image: item.imgUrl,
       })
     );
-    alert('product added to the cart');
+    toast.success('Product Added successfully');
   };
 
   return (
