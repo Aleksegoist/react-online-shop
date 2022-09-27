@@ -1,12 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import './header.css';
+
 import { Container, Row } from 'reactstrap';
 import logo from '../../assets/logo.png';
 import userIcon from '../../assets/user-icon.png';
 import { NavLink } from 'react-router-dom';
+
 import { HiOutlineShoppingBag } from 'react-icons/hi';
 import { AiOutlineHeart, AiOutlineMenu } from 'react-icons/ai';
+
 import { motion } from 'framer-motion';
+
+import { useSelector } from 'react-redux';
 
 const nav__links = [
   {
@@ -25,6 +30,8 @@ const nav__links = [
 
 const Header = () => {
   const headerRef = useRef(null);
+
+  const totalQuantity = useSelector((state) => state.cart.totalQuantity);
 
   const menuRef = useRef(null);
 
@@ -82,7 +89,7 @@ const Header = () => {
               </span>
               <span className='cart__icon'>
                 <HiOutlineShoppingBag size={24} />
-                <span className='badge1'>1</span>
+                <span className='badge1'>{totalQuantity}</span>
               </span>
               <span>
                 <motion.img whileTap={{ scale: 1.2 }} src={userIcon} alt='' />
