@@ -15,9 +15,19 @@ import { RiStarFill, RiStarHalfFill } from 'react-icons/ri';
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { useRef } from 'react';
+
+import { useDispatch } from 'react-redux';
+import { cartActions } from '../redux/slices/cartSlice';
+import { toast } from 'react-toastify';
 
 const ProductDetails = () => {
   const [tab, setTab] = useState('desc');
+
+  const reviewUser = useRef('');
+  const reviewMsg = useRef('');
+  const dispatch = useDispatch();
+
   const [rating, setRating] = useState(null);
 
   const { id } = useParams();
@@ -35,6 +45,25 @@ const ProductDetails = () => {
   } = product;
 
   const relatedProducts = products.filter((item) => item.category === category);
+
+  const submitHandle = (e) => {
+    e.preventDefault();
+
+    const reviewUserName = reviewUser.current.value;
+    const reviewUserMsg = reviewMsg.current.value;
+  };
+
+  const addToCart = () => {
+    dispatch(
+      cartActions.addItem({
+        id,
+        image: imgUrl,
+        productName,
+        price,
+      })
+    );
+    toast.success('Product added successfully');
+  };
 
   return (
     <Helmet title={productName}>
@@ -75,7 +104,11 @@ const ProductDetails = () => {
                   <p className='product__price'>${price}</p>
                   <p>Category: {category.toUpperCase()}</p>
                 </div>
-                <motion.button whileHover={{ scale: 1.1 }} className='buy__btn'>
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  className='buy__btn'
+                  onClick={addToCart}
+                >
                   Add To Cart
                 </motion.button>
               </div>
@@ -120,9 +153,13 @@ const ProductDetails = () => {
                     </ul>
                     <div className='review__form'>
                       <h4>Leave your experience</h4>
-                      <form action=''>
+                      <form action='' onSubmit={submitHandle}>
                         <div className='form__group'>
-                          <input type='text' placeholder='Enter your name' />
+                          <input
+                            type='text'
+                            placeholder='Enter your name'
+                            ref={reviewUser}
+                          />
                         </div>
 
                         <div className='form__group d-flex align-items-center gap-5'>
@@ -150,6 +187,7 @@ const ProductDetails = () => {
 
                         <div className='form__group'>
                           <textarea
+                            ref={reviewMsg}
                             rows={4}
                             type='text'
                             placeholder='Review message...'

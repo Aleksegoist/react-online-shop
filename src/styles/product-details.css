@@ -81,10 +81,10 @@
 .form__group span {
   display: flex;
   align-items: center;
-  column-gap: 5px;
   color: gold;
   font-weight: 600;
   cursor: pointer;
+  gap: 3px;
 }
 
 .related__title {
