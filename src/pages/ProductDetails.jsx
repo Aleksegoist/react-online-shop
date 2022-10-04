@@ -20,6 +20,7 @@ import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../redux/slices/cartSlice';
 import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 const ProductDetails = () => {
   const [tab, setTab] = useState('desc');
@@ -51,6 +52,15 @@ const ProductDetails = () => {
 
     const reviewUserName = reviewUser.current.value;
     const reviewUserMsg = reviewMsg.current.value;
+
+    const reviewObj = {
+      userName: reviewUserName,
+      text: reviewUserMsg,
+      rating,
+    };
+
+    console.log(reviewObj);
+    toast.success('Your review was added');
   };
 
   const addToCart = () => {
@@ -64,6 +74,10 @@ const ProductDetails = () => {
     );
     toast.success('Product added successfully');
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [product]);
 
   return (
     <Helmet title={productName}>
@@ -82,19 +96,19 @@ const ProductDetails = () => {
                 <p className='mt-3'>{shortDesc}</p>
                 <div className='product__rating d-flex align-items-center gap-5 mb-3'>
                   <div>
-                    <span onClick={() => setRating(1)}>
+                    <span>
                       <RiStarFill size={24} style={{ color: 'gold' }} />
                     </span>
-                    <span onClick={() => setRating(2)}>
+                    <span>
                       <RiStarFill size={24} style={{ color: 'gold' }} />
                     </span>
-                    <span onClick={() => setRating(3)}>
+                    <span>
                       <RiStarFill size={24} style={{ color: 'gold' }} />
                     </span>
-                    <span onClick={() => setRating(4)}>
+                    <span>
                       <RiStarFill size={24} style={{ color: 'gold' }} />
                     </span>
-                    <span onClick={() => setRating(5)}>
+                    <span>
                       <RiStarHalfFill size={24} style={{ color: 'gold' }} />
                     </span>
                   </div>
@@ -162,27 +176,42 @@ const ProductDetails = () => {
                           />
                         </div>
 
-                        <div className='form__group d-flex align-items-center gap-5'>
-                          <span>
+                        <div className='form__group'>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(1)}
+                          >
                             1
                             <RiStarFill />
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(2)}
+                          >
                             2
                             <RiStarFill />
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(3)}
+                          >
                             3
                             <RiStarFill />
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(4)}
+                          >
                             4
                             <RiStarFill />
-                          </span>
-                          <span>
+                          </motion.span>
+                          <motion.span
+                            whileTap={{ scale: 1.2 }}
+                            onClick={() => setRating(5)}
+                          >
                             5
                             <RiStarFill />
-                          </span>
+                          </motion.span>
                         </div>
 
                         <div className='form__group'>
