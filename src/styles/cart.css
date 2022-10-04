@@ -8,3 +8,16 @@ td,
 th {
   color: var(--primary-color);
 }
+
+.trash:hover {
+  color: red;
+}
+
+.cart__btn a {
+  color: #fff;
+  font-weight: 400;
+}
+
+.cart__btn a:hover {
+  color: #fff;
+}
