@@ -165,6 +165,7 @@ const ProductDetails = () => {
                         </li>
                       ))}
                     </ul>
+
                     <div className='review__form'>
                       <h4>Leave your experience</h4>
                       <form action='' onSubmit={submitHandle}>
@@ -173,6 +174,7 @@ const ProductDetails = () => {
                             type='text'
                             placeholder='Enter your name'
                             ref={reviewUser}
+                            required
                           />
                         </div>
 
@@ -220,6 +222,7 @@ const ProductDetails = () => {
                             rows={4}
                             type='text'
                             placeholder='Review message...'
+                            required
                           />
                         </div>
 
