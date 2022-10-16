@@ -15,6 +15,10 @@ import { useSelector } from 'react-redux';
 
 import useAuth from '../../custom-hooks/useAuth';
 
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase.config';
+import { toast } from 'react-toastify';
+
 const nav__links = [
   {
     path: 'home',
@@ -34,6 +38,7 @@ const Header = () => {
   const headerRef = useRef(null);
 
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
+  const profileActionRef = useRef(null);
 
   const menuRef = useRef(null);
   const navigate = useNavigate();
@@ -52,6 +57,16 @@ const Header = () => {
     });
   };
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success('Logged out');
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   useEffect(() => {
     stickyHeaderFunc();
     return () => window.removeEventListener('scroll', stickyHeaderFunc);
@@ -62,6 +77,9 @@ const Header = () => {
   const navigateToCart = () => {
     navigate('/cart');
   };
+
+  const toggleProfileActions = () =>
+    profileActionRef.current.classList.toggle('show__profileActions');
 
   return (
     <header className='header' ref={headerRef}>
@@ -74,6 +92,7 @@ const Header = () => {
                 <h1>OnlineStore</h1>
               </div>
             </div>
+
             <div className='navigation' ref={menuRef} onClick={menuToggle}>
               <ul className='menu'>
                 {nav__links.map((item, index) => (
@@ -90,11 +109,13 @@ const Header = () => {
                 ))}
               </ul>
             </div>
+
             <div className='nav__icons'>
               <span className='fav__icon'>
                 <AiOutlineHeart size={24} />
                 <span className='badge1'>1</span>
               </span>
+
               <span className='cart__icon' onClick={navigateToCart}>
                 <HiOutlineShoppingBag size={24} />
                 <span className='badge1'>{totalQuantity}</span>
@@ -105,11 +126,16 @@ const Header = () => {
                   whileTap={{ scale: 1.2 }}
                   src={currentUser ? currentUser.photoURL : userIcon}
                   alt=''
+                  onClick={toggleProfileActions}
                 />
 
-                <div className='profile__actions'>
+                <div
+                  className='profile__actions'
+                  ref={profileActionRef}
+                  onClick={toggleProfileActions}
+                >
                   {currentUser ? (
-                    <span>Logout</span>
+                    <span onClick={logout}>Logout</span>
                   ) : (
                     <div>
                       <Link to='/signup'>Signup</Link>
